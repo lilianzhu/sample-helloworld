@@ -7,6 +7,7 @@ clone:
 pipeline:
   build:
     image: index.qiniu.com/spock/golang:1.7
+    pull: true
     commands:
       - echo "hello dashu~"
       - echo $WHO
