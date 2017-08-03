@@ -8,7 +8,7 @@ pipeline:
   build:
     image: index.qiniu.com/spock/golang:1.7
     commands:
-      - echo "hello world~"
+      - echo "hello dashu~"
       - make build
       - make test
       - printenv
