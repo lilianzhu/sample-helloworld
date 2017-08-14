@@ -1,15 +1,36 @@
+workspace:
+  base: /workspace
+
 clone:
   sample-helloworld.git:
     image: index.qiniu.com/spock/git-plugin:cs-proxy
-    depth: 1
-    debug: true
+    path: /workspace/sample-helloworld
 
 pipeline:
   build:
     image: index.qiniu.com/spock/golang:1.7
     commands:
-      - echo "hello world~"
+      - cd /workspace/sample-helloworld
+      - mkdir -p cache
       - make build
       - make test
-      - printenv
-      - if [[ $CI_COMMIT_MESSAGE =~ .*SVC=abc.* ]]; then echo "found" ;fi;
+    volumes:
+      - /cache/sample-helloworld/cache:/workspace/sample-helloworld/cache
+
+  publish:
+    image: index.qiniu.com/spock/docker-client
+    commands:
+      - curl -s http://spock.dev.qiniu.io/assets/env.sh -o env.sh && source ./env.sh
+      - echo $SERVICE
+      - echo $TAG
+
+  archive:
+    image: index.qiniu.com/spock/kodo-plugin
+    pull: true
+    source: /workspace/sample-helloworld/go/demo
+    key: /sample-helloworld/demo
+    delete: true
+    secrets: [BUCKET_USER, BUCKET_PWD]
+
+    
+

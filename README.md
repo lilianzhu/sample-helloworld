@@ -33,6 +33,5 @@ Hello world from my Go program! You are 1st visitor!
 Hello world from my Node program!
 ```
 
-test
 
 
