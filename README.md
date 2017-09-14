@@ -30,7 +30,7 @@ Hello world from my Go program! You are 1st visitor!
 [ nodejs ]$ docker run -d -p 8000:8000 helloworld-node
 9f77df5feb5ff76ab02792962a8bae4f118fe90a5febf7226ae403a3283a823f
 [ nodejs ]$ curl localhost:8000
-Hello world from my Node program!
+Hello world from my Node program!!
 ```
 
 
